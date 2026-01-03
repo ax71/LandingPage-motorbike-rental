@@ -1,0 +1,236 @@
+Landing Page Penyewaan Sepeda Motor
+
+1. Informasi Umum Proyek
+Nama Proyek
+ Landing Page Penyewaan Sepeda Motor
+Tujuan Proyek
+Membangun sebuah landing page yang efektif untuk mempromosikan layanan penyewaan sepeda motor dan mendorong pengguna melakukan pemesanan melalui WhatsApp atau sistem booking sederhana.
+Target Pengguna
+Wisatawan lokal 
+Mancanegara
+
+
+Platform
+Web (Responsive: Mobile, Tablet, Desktop)
+
+
+
+2. Tujuan Bisnis
+Meningkatkan jumlah booking sewa motor
+
+
+Mempermudah calon pelanggan memahami layanan
+
+
+Mengurangi komunikasi bolak-balik via chat
+
+
+Membangun kepercayaan terhadap brand penyewaan
+
+
+Indikator Keberhasilan (KPI):
+Click-through rate (CTA WhatsApp)
+
+
+Jumlah booking harian
+
+
+Durasi kunjungan halaman
+
+
+Bounce rate rendah
+
+
+
+3. Scope Proyek
+3.1 In Scope
+Landing page 1 halaman
+
+
+Informasi layanan sewa motor
+
+
+Integrasi WhatsApp
+
+
+Tampilan responsif
+
+
+Optimasi performa dasar
+
+
+
+4. Functional Requirements
+4.1 Hero Section
+Headline utama
+
+
+Subheadline deskriptif
+Keunggulan Layanan
+"No Passport Deposit Required" (Cukup foto saja).
+"Free Delivery to Villa/Hotel" (Ini fitur pembunuh).
+"Insurance Included" (Bule suka rasa aman).
+
+
+Tombol Call-To-Action (CTA):
+
+
+Booking via WhatsApp, Contoh logic: Saat user klik tombol "Sewa Sekarang" di motor NMAX , link WA harus otomatis terisi:
+https://wa.me/6281xxx?text=Hello+I+want+to+rent+NMAX+for+3+days
+
+
+Cek Ketersediaan
+
+
+
+4.2 Daftar Motor
+Menampilkan daftar motor (maks. 6 unit)
+
+
+Informasi motor:
+
+
+Foto
+
+
+Nama / Tipe
+
+
+Harga sewa
+
+
+Spesifikasi singkat
+
+
+Tombol “Sewa Sekarang” (redirect ke WhatsApp)
+
+
+
+4.3 Informasi Harga
+Harga harian / mingguan / bulanan
+
+
+Informasi fasilitas yang termasuk
+
+
+Informasi biaya tambahan (jika ada)
+
+
+
+4.4 Cara Penyewaan (How It Works)
+Langkah-langkah penyewaan:
+
+
+Pilih motor
+
+
+Hubungi WhatsApp
+
+
+Verifikasi data
+
+
+Motor diantar atau di ambil di tempat
+
+
+
+4.5 Keunggulan Layanan
+Daftar value proposition
+
+
+Menggunakan icon dan teks singkat
+
+
+
+4.6 Testimoni Pelanggan
+Testimoni teks / gambar
+
+
+Rating bintang (opsional)
+
+
+
+4.7 Lokasi & Area Layanan
+Google Maps Embed
+
+
+Informasi area layanan
+
+
+
+4.8 FAQ
+Pertanyaan umum terkait penyewaan
+
+
+Minimal 5 pertanyaan
+
+
+
+4.9 Call To Action Penutup
+CTA besar dan jelas
+
+
+Tombol booking via WhatsApp
+
+
+
+5. Non-Functional Requirements
+5.1 Usability
+Mudah digunakan
+
+
+Navigasi sederhana
+
+
+Informasi jelas dan ringkas
+
+
+5.2 Performance
+Waktu load < 3 detik
+
+
+Optimasi gambar
+
+
+5.3 Responsiveness
+Mobile-first design
+
+
+Kompatibel di semua ukuran layar
+
+
+5.4 SEO Dasar
+Meta title & description
+
+
+Struktur heading yang benar
+
+
+Alt text pada gambar
+
+
+
+6. Teknologi yang Digunakan (Opsional)
+Frontend
+Next.js (opsional)
+
+
+Deployment
+Vercel
+
+
+
+7. User Flow
+User membuka landing page
+
+
+User melihat hero section
+
+
+User scroll melihat motor & harga
+
+
+User klik “Sewa Sekarang”
+
+
+Redirect ke WhatsApp dengan pesan otomatis
