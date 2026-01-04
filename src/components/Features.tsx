@@ -81,7 +81,7 @@ export default function Features() {
               key={index}
               className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6">
+              <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center text-yellow-400 mb-6">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">

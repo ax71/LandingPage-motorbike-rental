@@ -15,7 +15,6 @@ export default function LocationMap() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Map */}
           <div className="rounded-2xl overflow-hidden shadow-xl h-96">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126214.4096239386!2d115.1883!3d-8.6705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2409b0e5e80db%3A0xe27334e8ccb9374a!2sDenpasar%2C%20Bali%2C%20Indonesia!5e0!3m2!1sen!2s!4v1234567890"
@@ -28,7 +27,6 @@ export default function LocationMap() {
             ></iframe>
           </div>
 
-          {/* Service Areas */}
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
               Our Service Areas
@@ -76,7 +74,7 @@ export default function LocationMap() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-colors duration-200"
               >
                 <svg
                   className="w-5 h-5"

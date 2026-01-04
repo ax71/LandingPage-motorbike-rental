@@ -1,19 +1,24 @@
 import Image from "next/image";
 import { Motorcycle } from "@/types";
 import { generateWhatsAppURL } from "@/data";
+import { Button } from "./ui/button";
+import { formatPrice, calculateDays, calculateTotalPrice } from "@/lib/utils";
 
 interface MotorcycleCardProps {
   motorcycle: Motorcycle;
+  pickupDate?: string;
+  returnDate?: string;
 }
 
-export default function MotorcycleCard({ motorcycle }: MotorcycleCardProps) {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(price);
-  };
+export default function MotorcycleCard({
+  motorcycle,
+  pickupDate,
+  returnDate,
+}: MotorcycleCardProps) {
+  // Calculate rental duration and total price
+  const hasDateSelection = pickupDate && returnDate;
+  const days = hasDateSelection ? calculateDays(pickupDate, returnDate) : 1;
+  const totalPrice = calculateTotalPrice(motorcycle.pricePerDay, days);
 
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
@@ -71,21 +76,37 @@ export default function MotorcycleCard({ motorcycle }: MotorcycleCardProps) {
 
         <div className="flex items-end justify-between mb-4">
           <div>
-            <p className="text-sm text-gray-500 mb-1">Price per day</p>
-            <p className="text-2xl font-bold text-primary">
-              {formatPrice(motorcycle.pricePerDay)}
-            </p>
+            {hasDateSelection ? (
+              <>
+                <p className="text-sm text-gray-500 mb-1">
+                  Total Price for {days} {days === 1 ? "day" : "days"}
+                </p>
+                <p className="text-2xl font-bold text-yellow-600">
+                  {formatPrice(totalPrice)}
+                </p>
+                <p className="text-xs text-gray-400 mt-1">
+                  {formatPrice(motorcycle.pricePerDay)} / day
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-gray-500 mb-1">Price per day</p>
+                <p className="text-2xl font-bold text-yellow-600">
+                  {formatPrice(motorcycle.pricePerDay)}
+                </p>
+              </>
+            )}
           </div>
         </div>
-
-        <a
-          href={generateWhatsAppURL(motorcycle.name, 1)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full text-center px-6 py-3 bg-primary hover:bg-primary-dark text-white font-semibold rounded-full transition-colors duration-200"
-        >
-          Rent Now
-        </a>
+        <Button asChild variant="outline" className="w-full">
+          <a
+            href={generateWhatsAppURL(motorcycle.name, days)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Rent Now
+          </a>
+        </Button>
       </div>
     </div>
   );

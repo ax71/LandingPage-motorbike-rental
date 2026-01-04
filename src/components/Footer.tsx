@@ -3,7 +3,6 @@ import { WHATSAPP_NUMBER } from "@/data";
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300">
-      {/* Final CTA Section */}
       <div className="bg-gradient-to-r from-primary to-primary-dark">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
@@ -29,15 +28,14 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main Footer */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* About */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg"></div>
+              <div className="w-8 h-8 bg-yellow-600 rounded-lg"></div>
               <span className="text-xl font-bold text-white">Rental Motor</span>
             </div>
+
             <p className="text-sm leading-relaxed">
               Making motorcycle rental in Bali easy, affordable, and
               hassle-free. No passport deposit, free delivery, insurance
@@ -45,7 +43,6 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="font-bold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
@@ -95,7 +92,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Connect */}
           <div>
             <h3 className="font-bold text-white mb-4">Connect With Us</h3>
             <div className="flex gap-3">

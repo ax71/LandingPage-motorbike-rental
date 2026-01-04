@@ -45,7 +45,7 @@ export default function HowItWorks() {
               key={step.number}
               className="relative bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="text-6xl font-bold text-primary/20 mb-4">
+              <div className="text-6xl font-bold text-yellow-600 mb-4">
                 {step.number}
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">

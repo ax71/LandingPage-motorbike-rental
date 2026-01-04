@@ -54,7 +54,7 @@ export const motorcycles: Motorcycle[] = [
     id: "5",
     name: "Yamaha Aerox",
     type: "Sport Scooter",
-    image: "/images/motorcycles/yamaha-aerox.png",
+    image: "/images/motorcycles/AEROX-Metallic-Red.png",
     pricePerDay: 85000,
     specs: {
       capacity: "2 Person",
@@ -148,16 +148,7 @@ export const faqs: FAQItem[] = [
 ];
 
 // Service areas
-export const serviceAreas = [
-  "Canggu",
-  "Seminyak",
-  "Kuta",
-  "Sanur",
-  "Ubud",
-  "Denpasar",
-  "Nusa Dua",
-  "Uluwatu",
-];
+export const serviceAreas = ["Canggu", "Kuta", "Sanur", "Ubud", "Denpasar"];
 
 // WhatsApp number (user should update this)
 export const WHATSAPP_NUMBER = "6281234567890"; // TODO: Update with actual number
