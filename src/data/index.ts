@@ -148,7 +148,14 @@ export const faqs: FAQItem[] = [
 ];
 
 // Service areas
-export const serviceAreas = ["Canggu", "Kuta", "Sanur", "Ubud", "Denpasar"];
+export const serviceAreas = [
+  "Canggu",
+  "Kuta",
+  "Sanur",
+  "Ubud",
+  "Denpasar",
+  "Seminyak",
+];
 
 // WhatsApp number (user should update this)
 export const WHATSAPP_NUMBER = "6281234567890"; // TODO: Update with actual number

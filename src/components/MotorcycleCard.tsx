@@ -8,17 +8,25 @@ interface MotorcycleCardProps {
   motorcycle: Motorcycle;
   pickupDate?: string;
   returnDate?: string;
+  shippingFee?: number;
+  hasSearched?: boolean;
+  days?: number;
 }
 
 export default function MotorcycleCard({
   motorcycle,
   pickupDate,
   returnDate,
+  shippingFee = 0,
+  hasSearched = false,
+  days: propDays,
 }: MotorcycleCardProps) {
   // Calculate rental duration and total price
-  const hasDateSelection = pickupDate && returnDate;
-  const days = hasDateSelection ? calculateDays(pickupDate, returnDate) : 1;
-  const totalPrice = calculateTotalPrice(motorcycle.pricePerDay, days);
+  const calculatedDays =
+    pickupDate && returnDate ? calculateDays(pickupDate, returnDate) : 1;
+  const days = propDays || calculatedDays;
+  const basePrice = calculateTotalPrice(motorcycle.pricePerDay, days);
+  const totalPrice = basePrice + shippingFee;
 
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
@@ -75,17 +83,30 @@ export default function MotorcycleCard({
         </div>
 
         <div className="flex items-end justify-between mb-4">
-          <div>
-            {hasDateSelection ? (
+          <div className="flex-1">
+            {hasSearched ? (
               <>
-                <p className="text-sm text-gray-500 mb-1">
+                <p className="text-sm text-gray-500 mb-2">
                   Total Price for {days} {days === 1 ? "day" : "days"}
                 </p>
+
+                {/* Price Breakdown */}
+                <div className="mb-2">
+                  <p className="text-xs text-gray-600">
+                    ({formatPrice(motorcycle.pricePerDay)} × {days}{" "}
+                    {days === 1 ? "Day" : "Days"})
+                    {shippingFee > 0 &&
+                      ` + Shipping Fee of ${formatPrice(shippingFee)}`}
+                  </p>
+                  {shippingFee === 0 && (
+                    <p className="text-xs text-green-600 font-medium mt-1">
+                      + Free Shipping 🎉
+                    </p>
+                  )}
+                </div>
+
                 <p className="text-2xl font-bold text-yellow-600">
                   {formatPrice(totalPrice)}
-                </p>
-                <p className="text-xs text-gray-400 mt-1">
-                  {formatPrice(motorcycle.pricePerDay)} / day
                 </p>
               </>
             ) : (

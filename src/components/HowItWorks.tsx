@@ -31,7 +31,7 @@ export default function HowItWorks() {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            How <span className="text-primary">Rental Motor</span> Works
+            Easy <span className="text-yellow-600"> Rental Process</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Rent a motorcycle in 4 simple steps. It's quick, easy, and

@@ -5,13 +5,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { isValidDate } from "@/lib/utils";
+import { isValidDate, formatPrice } from "@/lib/utils";
+import { locations } from "@/data/locations";
 
 export default function Hero() {
   const router = useRouter();
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-  const [location, setLocation] = useState("");
+  const [locationId, setLocationId] = useState("");
   const [error, setError] = useState("");
 
   const handleSearch = () => {
@@ -34,8 +35,14 @@ export default function Hero() {
     const params = new URLSearchParams();
     params.set("pickup", pickupDate);
     params.set("return", returnDate);
-    if (location) {
-      params.set("location", location);
+
+    // Add location fee and name if location is selected
+    if (locationId) {
+      const selectedLocation = locations.find((loc) => loc.id === locationId);
+      if (selectedLocation) {
+        params.set("fee", selectedLocation.fee.toString());
+        params.set("loc_name", selectedLocation.name);
+      }
     }
 
     // Update URL and scroll to motorcycles section
@@ -135,14 +142,23 @@ export default function Hero() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Location / Villa
+                  Delivery Location
                 </label>
-                <Input
-                  className="h-[42px]"
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
+                <select
+                  className="h-[42px] w-full px-3 rounded-md border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  value={locationId}
+                  onChange={(e) => setLocationId(e.target.value)}
+                >
+                  <option value="">Select location</option>
+                  {locations.map((loc) => (
+                    <option key={loc.id} value={loc.id}>
+                      {loc.name}{" "}
+                      {loc.fee === 0
+                        ? "(Free Delivery)"
+                        : `(+${formatPrice(loc.fee)})`}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <Button
@@ -152,6 +168,9 @@ export default function Hero() {
                 Search
               </Button>
             </div>
+            {error && (
+              <p className="mt-3 text-sm text-red-600 font-medium">{error}</p>
+            )}
           </div>
         </div>
       </div>

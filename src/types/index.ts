@@ -12,6 +12,13 @@ export interface Motorcycle {
   };
 }
 
+// Location with delivery fee
+export interface Location {
+  id: string;
+  name: string;
+  fee: number;
+}
+
 // Testimonial data interface
 export interface Testimonial {
   id: string;

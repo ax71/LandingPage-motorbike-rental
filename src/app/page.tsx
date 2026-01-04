@@ -1,7 +1,7 @@
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
-import MotorcycleListings from "@/components/MotorcycleListings";
+import MotorcycleList from "@/components/MotorcycleList";
 import Testimonials from "@/components/Testimonials";
 import LocationMap from "@/components/LocationMap";
 import FAQ from "@/components/FAQ";
@@ -13,7 +13,7 @@ export default function Home() {
       <Hero />
       <Features />
       <HowItWorks />
-      <MotorcycleListings />
+      <MotorcycleList />
       <Testimonials />
       <LocationMap />
       <FAQ />
