@@ -158,15 +158,74 @@ export const serviceAreas = [
 ];
 
 // WhatsApp number (user should update this)
-export const WHATSAPP_NUMBER = "6281234567890"; // TODO: Update with actual number
+export const WHATSAPP_NUMBER = "6285190657236";
 
-// Helper function to generate WhatsApp URL
-export function generateWhatsAppURL(
-  motorcycleName: string,
-  days: number = 1
-): string {
-  const message = `Hello! I want to rent ${motorcycleName} for ${days} day${
-    days > 1 ? "s" : ""
-  }`;
+export interface WhatsAppBookingDetails {
+  motorcycleName: string;
+  pickupDate: string;
+  returnDate: string;
+  days: number;
+  dailyPrice: number;
+  deliveryFee: number;
+  locationName: string;
+  customerType: "foreigner" | "local";
+}
+
+export function formatRupiah(amount: number): string {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  })
+    .format(amount)
+    .replace("IDR", "Rp")
+    .trim();
+}
+
+export function generateWhatsAppURL(details: WhatsAppBookingDetails): string {
+  const {
+    motorcycleName,
+    pickupDate,
+    returnDate,
+    days,
+    dailyPrice,
+    deliveryFee,
+    locationName,
+    customerType,
+  } = details;
+
+  const rentalTotal = dailyPrice * days;
+  const grandTotal = rentalTotal + deliveryFee;
+
+  const deliveryDisplay =
+    deliveryFee === 0 ? "Free Shipping" : `+ ${formatRupiah(deliveryFee)}`;
+
+  // Determine document requirements based on customer type
+  const documents =
+    customerType === "foreigner"
+      ? "Passport & Driving License"
+      : "E-KTP Asli, SIM C, Flight Code & Hotel Booking Proof";
+
+  const customerLabel = customerType === "foreigner" ? "Foreigner" : "Local";
+
+  // Build the detailed message
+  const message = `Hello! I want to rent a scooter
+
+ * Unit: ${motorcycleName}
+ * Dates: ${pickupDate} - ${returnDate} (${days} Day${days > 1 ? "s" : ""})
+ * Location: ${locationName}
+
+ * Price Calculation:
+    - (${formatRupiah(dailyPrice)} × ${days} Day${days > 1 ? "s" : ""})
+    - ${deliveryDisplay}
+    -----------------------------
+    TOTAL PRICE: ${formatRupiah(grandTotal)}
+
+* Customer: ${customerLabel}
+* I will provide: ${documents}
+
+  Is it available?`;
+
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

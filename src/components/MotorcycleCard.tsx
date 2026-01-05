@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Motorcycle } from "@/types";
-import { generateWhatsAppURL } from "@/data";
+import { generateWhatsAppURL, type WhatsAppBookingDetails } from "@/data";
 import { Button } from "./ui/button";
 import { formatPrice, calculateDays, calculateTotalPrice } from "@/lib/utils";
 
@@ -11,6 +11,8 @@ interface MotorcycleCardProps {
   shippingFee?: number;
   hasSearched?: boolean;
   days?: number;
+  locationName?: string;
+  customerType?: "foreigner" | "local";
 }
 
 export default function MotorcycleCard({
@@ -20,6 +22,8 @@ export default function MotorcycleCard({
   shippingFee = 0,
   hasSearched = false,
   days: propDays,
+  locationName,
+  customerType,
 }: MotorcycleCardProps) {
   // Calculate rental duration and total price
   const calculatedDays =
@@ -27,6 +31,33 @@ export default function MotorcycleCard({
   const days = propDays || calculatedDays;
   const basePrice = calculateTotalPrice(motorcycle.pricePerDay, days);
   const totalPrice = basePrice + shippingFee;
+
+  // Handle booking button click
+  const handleBooking = () => {
+    if (!hasSearched) {
+      // Scroll to hero section to prompt user to input dates
+      const heroSection = document.getElementById("hero");
+      if (heroSection) {
+        heroSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      return;
+    }
+
+    // Generate WhatsApp URL with complete booking details
+    const bookingDetails: WhatsAppBookingDetails = {
+      motorcycleName: motorcycle.name,
+      pickupDate: pickupDate || "",
+      returnDate: returnDate || "",
+      days,
+      dailyPrice: motorcycle.pricePerDay,
+      deliveryFee: shippingFee,
+      locationName: locationName || "To be confirmed",
+      customerType: customerType || "foreigner",
+    };
+
+    const whatsappUrl = generateWhatsAppURL(bookingDetails);
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
@@ -119,14 +150,8 @@ export default function MotorcycleCard({
             )}
           </div>
         </div>
-        <Button asChild variant="outline" className="w-full">
-          <a
-            href={generateWhatsAppURL(motorcycle.name, days)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Rent Now
-          </a>
+        <Button onClick={handleBooking} variant="outline" className="w-full">
+          {hasSearched ? "Rent Now" : "Select Dates to Book"}
         </Button>
       </div>
     </div>

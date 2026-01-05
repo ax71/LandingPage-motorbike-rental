@@ -13,6 +13,8 @@ export default function MotorcycleList() {
     ? parseInt(searchParams.get("fee")!)
     : undefined;
   const locationName = searchParams.get("loc_name") || undefined;
+  const customerType =
+    (searchParams.get("type") as "foreigner" | "local") || undefined;
 
   // Check if user has performed a search
   const hasSearched = !!(pickupDate && returnDate);
@@ -71,6 +73,8 @@ export default function MotorcycleList() {
               shippingFee={fee}
               hasSearched={hasSearched}
               days={days}
+              locationName={locationName}
+              customerType={customerType}
             />
           ))}
         </div>

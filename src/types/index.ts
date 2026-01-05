@@ -36,9 +36,15 @@ export interface FAQItem {
   answer: string;
 }
 
+// Customer type for document requirements
+export type CustomerType = "foreigner" | "local";
+
 // Booking form data
 export interface BookingFormData {
   pickupDate: string;
   returnDate: string;
   location: string;
+  locationFee: number;
+  duration: number;
+  customerType: CustomerType;
 }
