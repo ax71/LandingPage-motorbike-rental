@@ -25,7 +25,6 @@ export default function MotorcycleCard({
   locationName,
   customerType,
 }: MotorcycleCardProps) {
-  // Calculate rental duration and total price
   const calculatedDays =
     pickupDate && returnDate ? calculateDays(pickupDate, returnDate) : 1;
   const days = propDays || calculatedDays;

@@ -21,7 +21,7 @@ interface WhatsAppBookingData {
  */
 export function generateWhatsAppLink(
   data: WhatsAppBookingData,
-  phoneNumber: string = "6281234567890" // Replace with your actual WhatsApp business number
+  phoneNumber: string = "6281234567890", // Replace with your actual WhatsApp business number
 ): string {
   const {
     motorcycleName,
@@ -32,7 +32,6 @@ export function generateWhatsAppLink(
     deliveryFee,
     pricePerDay,
     totalPrice,
-    customerType,
   } = data;
 
   // Format dates for better readability
@@ -46,39 +45,24 @@ export function generateWhatsAppLink(
     });
   };
 
-  // Document requirements based on customer type
-  const documentRequirements =
-    customerType === "foreigner"
-      ? "I will provide:\n- Photo Passport\n- Driving License"
-      : "I will provide:\n- E-KTP Asli (will be deposited)\n- SIM C\n- Flight Code\n- Hotel Booking Proof";
-
   // Build WhatsApp message
-  const message = `🏍️ *MOTORCYCLE RENTAL BOOKING*
+  const message = `*MOTORCYCLE RENTAL BOOKING*
 
 *Motorcycle:* ${motorcycleName}
 
-📅 *Rental Period:*
+*Rental Period:*
 • Pickup: ${formatDate(pickupDate)}
 • Return: ${formatDate(returnDate)}
 • Duration: ${duration} hari
 
-📍 *Delivery Location:* ${location}
+*Delivery Location:* ${location}
 
-💰 *Price Details:*
+*Price Details:*
 • Rental: ${formatPrice(pricePerDay)} × ${duration} hari = ${formatPrice(
-    pricePerDay * duration
+    pricePerDay * duration,
   )}
 • Delivery Fee: ${deliveryFee === 0 ? "FREE ✨" : formatPrice(deliveryFee)}
 • *Total: ${formatPrice(totalPrice)}*
-
-👤 *Customer Type:* ${
-    customerType === "foreigner"
-      ? "Foreigner (Wisatawan Asing)"
-      : "Local (Wisatawan Lokal/Indo)"
-  }
-
-📄 *Document Requirements:*
-${documentRequirements}
 
 I would like to proceed with this booking. Please confirm availability.`;
 
@@ -94,7 +78,7 @@ I would like to proceed with this booking. Please confirm availability.`;
  */
 export function openWhatsAppBooking(
   data: WhatsAppBookingData,
-  phoneNumber?: string
+  phoneNumber?: string,
 ): void {
   const link = generateWhatsAppLink(data, phoneNumber);
   window.open(link, "_blank");

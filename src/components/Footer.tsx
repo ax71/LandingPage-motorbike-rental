@@ -1,4 +1,5 @@
 import { WHATSAPP_NUMBER } from "@/data";
+import { Motorbike } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -32,7 +33,9 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-yellow-400 rounded-lg"></div>
+              <div className="flex items-center justify-center w-8 h-8 bg-yellow-600 rounded-lg">
+                <Motorbike color="black" />
+              </div>
               <span className="text-xl font-bold text-white">Rental Motor</span>
             </div>
 

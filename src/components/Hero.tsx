@@ -6,19 +6,16 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { isValidDate, formatPrice } from "@/lib/utils";
-import { locations } from "@/data/locations";
-import { CustomerType } from "@/types";
+import { Motorbike } from "lucide-react";
 
 export default function Hero() {
   const router = useRouter();
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [locationId, setLocationId] = useState("");
-  const [customerType, setCustomerType] = useState<CustomerType>("foreigner");
   const [error, setError] = useState("");
 
   const handleSearch = () => {
-    // 1. Validasi Tanggal Dasar
     if (!isValidDate(pickupDate) || !isValidDate(returnDate)) {
       setError("Please select both pickup and return dates");
       return;
@@ -33,17 +30,14 @@ export default function Hero() {
     const pickupDateTime = new Date(pickupDate).getTime();
     const returnDateTime = new Date(returnDate).getTime();
     const duration = Math.ceil(
-      (returnDateTime - pickupDateTime) / (1000 * 60 * 60 * 24)
+      (returnDateTime - pickupDateTime) / (1000 * 60 * 60 * 24),
     );
 
-    // --- PERUBAHAN DI SINI: Validasi Global Minimal 3 Hari ---
-    // Aturan ini sekarang berlaku untuk SEMUA lokasi, bukan cuma Canggu.
     if (duration < 3) {
       setError("Minimal sewa motor adalah 3 hari untuk semua lokasi.");
       return;
     }
 
-    // Clear error jika lolos validasi
     setError("");
 
     // 3. Buat URL Params
@@ -51,31 +45,7 @@ export default function Hero() {
     params.set("pickup", pickupDate);
     params.set("return", returnDate);
     params.set("duration", duration.toString());
-    params.set("type", customerType);
 
-    // 4. Proses Lokasi & Fee
-    if (locationId) {
-      const selectedLocation = locations.find((loc) => loc.id === locationId);
-      if (selectedLocation) {
-        let finalFee = selectedLocation.fee;
-
-        if (selectedLocation.name === "Canggu") {
-          if (duration >= 7) {
-            finalFee = 0;
-          }
-        }
-        // Jika Anda ingin SEMUA lokasi gratis ongkir kalau sewa mingguan, gunakan kode ini sebagai gantinya:
-        /* if (duration >= 7) {
-           finalFee = 0;
-        }
-        */
-
-        params.set("fee", finalFee.toString());
-        params.set("loc_name", selectedLocation.name);
-      }
-    }
-
-    // Update URL dan scroll
     router.push(`/?${params.toString()}#motorcycles`);
 
     setTimeout(() => {
@@ -90,17 +60,17 @@ export default function Hero() {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-100 rounded-full mb-6">
-              <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-yellow-700">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500 rounded-lg mb-6">
+              <div className="w-6 h-6 text-gray-800">
+                <Motorbike />
+              </div>
+              <span className="text-sm font-medium text-white">
                 Rental Motor
               </span>
             </div>
 
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              Make Your Ride
-              <br />
-              <span className="text-yellow-700">Easy & Affordable</span>
+              Sanur Best Motorbike Rental
             </h1>
 
             <p className="text-lg text-gray-600 mb-8 max-w-xl mx-auto lg:mx-0">
@@ -144,44 +114,6 @@ export default function Hero() {
 
         <div className="mt-16 max-w-6xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                Customer Type
-              </label>
-              <div className="flex gap-4">
-                <label className="flex items-center cursor-pointer group">
-                  <input
-                    type="radio"
-                    name="customerType"
-                    value="foreigner"
-                    checked={customerType === "foreigner"}
-                    onChange={(e) =>
-                      setCustomerType(e.target.value as CustomerType)
-                    }
-                    className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
-                  />
-                  <span className="ml-2 text-sm font-medium text-gray-700">
-                    Foreigner (Wisatawan Asing)
-                  </span>
-                </label>
-                <label className="flex items-center cursor-pointer group">
-                  <input
-                    type="radio"
-                    name="customerType"
-                    value="local"
-                    checked={customerType === "local"}
-                    onChange={(e) =>
-                      setCustomerType(e.target.value as CustomerType)
-                    }
-                    className="w-4 h-4 text-yellow-400 border-gray-300 focus:ring-yellow-400"
-                  />
-                  <span className="ml-2 text-sm font-medium text-gray-700">
-                    Local (Wisatawan Lokal/Indo)
-                  </span>
-                </label>
-              </div>
-            </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_1.2fr_auto] gap-4 items-end">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -206,30 +138,6 @@ export default function Hero() {
                   onChange={(e) => setReturnDate(e.target.value)}
                 />
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Delivery Location
-                </label>
-                <select
-                  className="h-[42px] w-full px-3 rounded-md border border-gray-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                  value={locationId}
-                  onChange={(e) => setLocationId(e.target.value)}
-                >
-                  <option value="">Select location</option>
-                  {locations.map((loc) => (
-                    <option key={loc.id} value={loc.id}>
-                      {loc.name}{" "}
-                      {loc.name === "Canggu"
-                        ? ""
-                        : loc.fee === 0
-                        ? "(Free Delivery)"
-                        : `(+${formatPrice(loc.fee)})`}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
               <Button
                 onClick={handleSearch}
                 className="h-[42px] px-6 bg-yellow-400 hover:bg-yellow-500 text-white font-semibold rounded-lg shadow-md"

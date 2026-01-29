@@ -1,4 +1,4 @@
-import { serviceAreas, WHATSAPP_NUMBER } from "@/data";
+import { WHATSAPP_NUMBER } from "@/data";
 
 export default function LocationMap() {
   return (
@@ -17,9 +17,9 @@ export default function LocationMap() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div className="rounded-2xl overflow-hidden shadow-xl h-96">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37925.16849699369!2d115.11941640815849!3d-8.639484521189033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23861f4589665%3A0x5030bfbca82fd30!2sCanggu%2C%20Kec.%20Kuta%20Utara%2C%20Kabupaten%20Badung%2C%20Bali!5e1!3m2!1sid!2sid!4v1767615419596!5m2!1sid!2sid"
-              width="100%"
-              height="100%"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d18959.795469187324!2d115.2492267107955!3d-8.694767100469411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd241b7d35f0b21%3A0x5030bfbca830e40!2sSanur%2C%20Denpasar%20Selatan%2C%20Kota%20Denpasar%2C%20Bali!5e1!3m2!1sid!2sid!4v1769659115564!5m2!1sid!2sid"
+              width="600"
+              height="450"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
@@ -31,38 +31,6 @@ export default function LocationMap() {
             <h3 className="text-2xl font-bold text-gray-900 mb-6">
               Our Service Areas
             </h3>
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {serviceAreas.map((area, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm"
-                >
-                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-4 h-4 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <span className="font-medium text-gray-700">{area}</span>
-                </div>
-              ))}
-            </div>
-
             <div className="bg-primary/5 border-2 border-primary/20 rounded-2xl p-6">
               <p className="text-gray-700 mb-4">
                 Don't see your location? Contact us on WhatsApp and we'll check
@@ -70,7 +38,7 @@ export default function LocationMap() {
               </p>
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                  "Hello! I'd like to check if you deliver to my location."
+                  "Hello! I'd like to check if you deliver to my location.",
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

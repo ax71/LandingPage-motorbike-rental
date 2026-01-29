@@ -1,4 +1,3 @@
-// Motorcycle data interface
 export interface Motorcycle {
   id: string;
   name: string;
@@ -8,7 +7,6 @@ export interface Motorcycle {
   specs: {
     capacity: string;
     transmission: string;
-    fuelType?: string;
   };
 }
 
